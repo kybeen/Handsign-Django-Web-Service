@@ -1,0 +1,17 @@
+{% extends "layout.html" %}
+{% block title %} Post목록 {% endblock %}
+{% block content %}
+     <h1>Post 목록 보기</h1>
+     <form action="" method="get">
+        {% csrf_token %}
+         검색어:<input type="text" name="keyword" value="{{q|default:''}}" >
+         <input type="submit" value="검색">
+     </form>    
+ 
+    {% for post in post_all %}
+        <a href="{% url 'blog:detail' post.id %}"> {{post.title}}</a><br>
+        
+    {% endfor %}
+    <a href="{% url 'blog:create' %}">[새 글 쓰기]</a>
+
+ {% endblock %}

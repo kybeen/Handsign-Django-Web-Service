@@ -1,0 +1,53 @@
+{% extends "admin/change_list.html" %}
+{% load static %}
+
+
+
+{% block extrahead %}
+{{ block.super }}
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script src="encoding.js"></script>
+<script type="text/javascript">
+  google.charts.load("current", {packages:['corechart']});
+  google.charts.setOnLoadCallback(drawChart);
+  function drawChart() {
+      var temp = [ ["version", "정확도", { role: "style" }] ]
+      var models = {{model_context | safe}}; // safe 해줘야 문자열 안깨짐
+      var colors = [ "#b87333", "silver", "gold", "color: #e5e4e2", 'orange' ]
+      for (var i=0; i<models.length; i++){
+        color_idx = 5 % i; // 5가지 색깔 번갈아가면서 확인
+        temp.push([models[i][0], models[i][1], colors[color_idx]]);
+      }
+      console.log(temp)
+      var data = google.visualization.arrayToDataTable(
+        temp
+      );
+
+      var view = new google.visualization.DataView(data);
+      view.setColumns([0, 1,
+                       { calc: "stringify",
+                         sourceColumn: 1,
+                         type: "string",
+                         role: "annotation" },
+                       2]);
+
+      var options = {
+        title: "모델 별 정확도",
+        width: 450,
+        height: 300,
+        bar: {groupWidth: "60%"},
+        legend: { position: "none" },
+        vAxis: {title: '정확도(%)', maxValue:100, minValue:0}, // y축 옵션
+        hAxis: {title: '모델'} // x축 옵션
+      };
+      var chart = new google.visualization.ColumnChart(document.getElementById("columnchart_values"));
+      chart.draw(view, options);
+  }
+  </script> 
+{% endblock %}
+
+
+{% block content %}
+<div id="columnchart_values" style="width: 900px; height: 300px;"></div>
+{{ block.super }}
+{% endblock %}

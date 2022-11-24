@@ -1,0 +1,31 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'language/style.css' %}?after">
+    <form action="upload" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <span id="form1" style="display:">
+            <fieldset>
+                <legend><h1>파일 업로드</h1></legend>
+                <input name="files" type="file" >
+            </fieldset>
+            <div>정답 : <input name="answer" type="text"></div>
+            <input type='button' value='이미지 삭제' onclick=''/>
+        </span>
+        <input type='button' value='이미지 추가' onclick='copyForm()'/>
+        <div><input type="submit" value="업로드"></div>
+    </form>
+
+<script>
+    let idNum = 1;
+    function copyForm() {
+        let copy = document.getElementById('form1');
+        let last_form = document.getElementById('form'+idNum.toString());
+        console.log(last_form);
+        idNum++;
+        let new_form = copy.cloneNode(true);
+        new_form.getElementsByTagName('input')[0].value='';
+        new_form.getElementsByTagName('input')[1].value='';
+        new_form.id = 'form'+idNum;
+
+        last_form.after(new_form);
+    }
+</script>

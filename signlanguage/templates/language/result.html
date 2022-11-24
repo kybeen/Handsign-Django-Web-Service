@@ -1,0 +1,39 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'language/style.css' %}?after"> 
+  <div class="one_box">
+  {%for result in result_list%}
+    {% if result.isCorrect %}
+    <div class="true-box" style="display:block">
+      <div>
+        <span class="answer"> {{ result.isCorrect }} </span>
+      </div>
+      <div>
+        <img src="{{ result.image.url }}">
+      </div>
+      <div>
+        예측 결과 : {{ result.result }}
+      </div>
+      <div>
+        정답 : {{ result.answer }}
+      </div>
+
+    </div>
+    {% endif %}
+    {% if not result.isCorrect %}
+    <div class="false-box" style="display:block">
+      <div>
+        <span class="answer"> {{ result.isCorrect }} </span>
+      </div>
+      <div>
+        <img src="{{ result.image.url }}">
+      </div>
+      <div>
+        예측 결과 : {{ result.result }}
+      </div>
+      <div>
+        정답 : {{ result.answer }}
+      </div>
+    </div>
+    {% endif %}
+  {%endfor%}
+  </div>
