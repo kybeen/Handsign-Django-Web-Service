@@ -13,14 +13,14 @@
 
 
 ## 기능 설명
-**- 이미지 업로드**
+- **이미지 업로드**
 
 ![image](https://user-images.githubusercontent.com/89764127/203763686-87b5f7c6-21fa-48da-8e8f-55e36bb08bdc.png)
 
-**- 한번에 여러 장의 이미지 업로드 가능**
+- **한번에 여러 장의 이미지 업로드 가능**
 
 ![image](https://user-images.githubusercontent.com/89764127/203763929-b4aa5317-89cd-4131-a238-052c1ce58faa.png)
 
-**- 예측 결과 확인**
+- **예측 결과 확인**
 
 ![image](https://user-images.githubusercontent.com/89764127/203763988-106570ab-bd4d-4008-8581-576749f052d6.png)
